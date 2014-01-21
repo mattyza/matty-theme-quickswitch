@@ -98,6 +98,11 @@
 
 		mattyThemeQuickSwitch.add_search_box();
 
+		// Make sure the search field focuses when visible.
+		$( '#wp-admin-bar-matty-theme-quickswitch' ).mouseover( function ( e ) {
+			$( '#wp-admin-bar-matty-theme-quickswitch' ).find( 'input.search' ).focus();
+		});
+
 		$( '#wp-admin-bar-matty-theme-quickswitch' ).find( 'input.search' ).keyup( function ( e ) {
 			if ( $( this ).val() != '' ) {
 				mattyThemeQuickSwitch.perform_search( $( this ).val() );

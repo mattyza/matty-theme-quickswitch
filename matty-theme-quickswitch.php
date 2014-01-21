@@ -5,8 +5,8 @@ Plugin URI: http://matty.co.za/
 Description: Adds a quick theme switcher to the WordPress Admin Bar, aimed at speeding up rapid theme switching during theme development and maintenance.
 Author: Matty
 Author URI: http://matty.co.za/
-Version: 1.2.0
-Stable tag: 1.2.0
+Version: 1.2.1
+Stable tag: 1.2.1
 License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 */
 

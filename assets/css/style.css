@@ -24,7 +24,7 @@ body.admin-color-classic #wpadminbar #wp-admin-bar-matty-theme-quickswitch .sear
 	background-image: linear-gradient(top,#F7FCFE,#EFF8FF);
 }
 #wpadminbar #wp-admin-bar-matty-theme-quickswitch .search-form .search { background: #FFFFFF url(../../../../../wp-includes/images/admin-bar-sprite.png) no-repeat 5px 10px; width: 100%; padding: 5px 30px 5px 30px; text-shadow: none; }
-#wpadminbar #wp-admin-bar-matty-theme-quickswitch .search-form .reset { background: transparent url(../images/btn-reset.png) no-repeat left top; display: block; width: 16px; height: 16px; text-indent: -9999px;position: absolute; right: -8px; margin-top: -28px; }
+#wpadminbar #wp-admin-bar-matty-theme-quickswitch .search-form .reset { background: transparent url(../images/btn-reset.png) no-repeat left top; display: block; width: 16px; height: 16px; text-indent: -9999px; position: absolute; right: 2px; margin-top: -28px; }
 
 #wpadminbar #wp-admin-bar-matty-theme-quickswitch #wp-admin-bar-heading-child-themes a, 
 #wpadminbar #wp-admin-bar-matty-theme-quickswitch #wp-admin-bar-heading-parent-themes a { color: #999999; font-style: italic; }
