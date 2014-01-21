@@ -1,0 +1,26 @@
+#wpwrap { min-height: none !important; }
+#wpadminbar #wp-admin-bar-matty-theme-quickswitch { float: right; }
+#wpadminbar #wp-admin-bar-matty-theme-quickswitch .ab-sub-wrapper { height: 500px; overflow-y: hidden !important; overflow-x: hidden !important; right: 0; left: auto; min-width: 320px; max-width: 320px; }
+#wpadminbar #wp-admin-bar-matty-theme-quickswitch ul { display: block; height: 500px; overflow-y: auto !important; }
+#wpadminbar #wp-admin-bar-matty-theme-quickswitch .ab-sub-wrapper .hide-theme { display: none; }
+#wpadminbar #wp-admin-bar-matty-theme-quickswitch .search-form { background: #ECECEC; display: block; text-align: center; padding: 8px; }
+body.admin-color-fresh #wpadminbar #wp-admin-bar-matty-theme-quickswitch .search-form {
+	background-color: #F1F1F1;
+	background-image: -ms-linear-gradient(top,#F9F9F9,#ECECEC);
+	background-image: -moz-linear-gradient(top,#F9F9F9,#ECECEC);
+	background-image: -o-linear-gradient(top,#F9F9F9,#ECECEC);
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#F9F9F9),to(#ECECEC));
+	background-image: -webkit-linear-gradient(top,#F9F9F9,#ECECEC);
+	background-image: linear-gradient(top,#F9F9F9,#ECECEC);
+}
+body.admin-color-classic #wpadminbar #wp-admin-bar-matty-theme-quickswitch .search-form {
+	background-color: #F5FAFD;
+	background-image: -ms-linear-gradient(top,#F7FCFE,#EFF8FF);
+	background-image: -moz-linear-gradient(top,#F7FCFE,#EFF8FF);
+	background-image: -o-linear-gradient(top,#F7FCFE,#EFF8FF);
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#F7FCFE),to(#EFF8FF));
+	background-image: -webkit-linear-gradient(top,#F7FCFE,#EFF8FF);
+	background-image: linear-gradient(top,#F7FCFE,#EFF8FF);
+}
+#wpadminbar #wp-admin-bar-matty-theme-quickswitch .search-form .search { width: 100%; padding: 0px 5px; text-shadow: none; padding-right: 30px; }
+#wpadminbar #wp-admin-bar-matty-theme-quickswitch .search-form .reset { background: transparent url(../images/btn-reset.png) no-repeat left top; display: block; width: 16px; height: 16px; text-indent: -9999px;position: absolute; right: -8px; margin-top: -23px; }

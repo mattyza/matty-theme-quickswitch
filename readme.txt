@@ -4,15 +4,15 @@ Donate link: http://matty.co.za/
 Tags: themes, theme-development, development, theme switching, admin-bar
 Requires at least: 3.2.1
 Tested up to: 3.3
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 
-Quickly switch between themes via a menu in the WordPress admin bar.
+Quickly switch between themes via a menu in the WordPress Toolbar.
 
 == Description ==
 
 Matty Theme QuickSwitch makes it easy to activate a theme without needing to visit the "Appearance -> Themes" screen in the WordPress admin.
 
-A new menu in the WordPress admin bar lists all themes currently available on your website, with quick links to activate each individually.
+A new menu in the WordPress Toolbar lists all themes currently available on your website, with quick links to activate each individually.
 
 Theme QuickSwitch is particularly useful when developing or debugging WordPress themes, as it saves time in getting you to the place you need to be.
 
@@ -33,9 +33,9 @@ Theme QuickSwitch is particularly useful when developing or debugging WordPress 
 
 == Frequently Asked Questions ==
 
-= Is there any way to display the theme switcher menu elsewhere, other than the WordPress admin bar? =
+= Is there any way to display the theme switcher menu elsewhere, other than the WordPress Toolbar? =
 
-Currently, the WordPress admin bar is required in order to use Matty Theme QuickSwitch.
+Currently, the WordPress Toolbar is required in order to use Matty Theme QuickSwitch.
 
 == Screenshots ==
 
@@ -43,10 +43,17 @@ Currently, the WordPress admin bar is required in order to use Matty Theme Quick
 
 == Changelog ==
 
-= 1.0 =
+= 1.1.0 =
+* Added search form and search logic to the theme switcher menu on the WordPress toolbar.
+* Moved CSS to a separate file and added JavaScript file.
+
+= 1.0.0 =
 * First Release!
 
 == Upgrade Notice ==
 
-= 1.0 =
+= 1.1.0 =
+Added search functionality to the theme switcher menu.
+
+= 1.0.0 =
 First Release!
