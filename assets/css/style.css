@@ -1,5 +1,4 @@
 #wpwrap { min-height: none !important; }
-#wpadminbar #wp-admin-bar-matty-theme-quickswitch { float: right; }
 #wpadminbar #wp-admin-bar-matty-theme-quickswitch .ab-sub-wrapper { height: 536px; overflow-y: hidden !important; overflow-x: hidden !important; right: 0; left: auto; min-width: 320px; max-width: 320px; }
 #wpadminbar #wp-admin-bar-matty-theme-quickswitch ul { display: block; height: 525px; overflow-y: auto !important; }
 #wpadminbar #wp-admin-bar-matty-theme-quickswitch .ab-sub-wrapper .hide-theme { display: none; }
