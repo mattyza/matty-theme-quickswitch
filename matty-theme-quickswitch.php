@@ -5,8 +5,8 @@ Plugin URI: http://matty.co.za/
 Description: Adds a quick theme switcher to the WordPress Admin Bar, aimed at speeding up rapid theme switching during theme development and maintenance.
 Author: Matty
 Author URI: http://matty.co.za/
-Version: 1.2.1
-Stable tag: 1.2.1
+Version: 1.2.2
+Stable tag: 1.2.2
 License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 */
 
@@ -20,6 +20,7 @@ if ( is_admin() ) {
  * matty_theme_quickswitch_menu function.
  * 
  * @access public
+ * @since 1.0.0
  * @return void
  */
 function matty_theme_quickswitch_menu () {
@@ -37,18 +38,21 @@ function matty_theme_quickswitch_menu () {
 	$menu_id = 'matty-theme-quickswitch';
 	$menu_label = $current_theme['Name'];
 
-	if ( ! isset( $themes  ) || ! is_array( $themes ) ) { return; } 
-
-	// Main Menu Item
-	$wp_admin_bar->add_menu( array( 'id' => $menu_id, 'title' => $menu_label, 'href' => '#' ) );
+	if ( ! isset( $themes  ) || ! is_array( $themes ) ) { return; }
 
 	foreach ( $themes as $k => $v ) {
+		if ( in_array( get_stylesheet_directory() . '/style.css', $v['Stylesheet Files'] ) ) {
+			$menu_label = $v['Name'];
+		}
 		if ( $v['Template'] != $v['Stylesheet'] ) {
 			$child_themes[] = $v;
 		} else {
 			$parent_themes[] = $v;
 		}
 	}
+
+	// Main Menu Item
+	$wp_admin_bar->add_menu( array( 'id' => $menu_id, 'title' => $menu_label, 'href' => '#' ) );
 
 	if ( count( $child_themes ) > 0 ) {
 		$has_child_themes = true;
@@ -75,7 +79,10 @@ function matty_theme_quickswitch_menu () {
 			$end_child_themes = true;
 		}
 
-		$wp_admin_bar->add_menu( array( 'parent' => 'matty-theme-quickswitch', 'id' => 'theme-' . $id, 'title' => $v['Name'], 'href' => $activate_link ) );
+		$name = $v['Name'];
+		if ( $name == $menu_label ) { $name = '<strong>' . $name . '</strong>'; }
+
+		$wp_admin_bar->add_menu( array( 'parent' => 'matty-theme-quickswitch', 'id' => 'theme-' . $id, 'title' => $name, 'href' => $activate_link ) );
 	}
 } // End matty_theme_quickswitch_menu()
 
@@ -83,6 +90,7 @@ function matty_theme_quickswitch_menu () {
  * matty_theme_quickswitch_css function.
  * 
  * @access public
+ * @since 1.0.0
  * @return void
  */
 function matty_theme_quickswitch_css () {
@@ -98,6 +106,7 @@ function matty_theme_quickswitch_css () {
  * matty_theme_quickswitch_js function.
  * 
  * @access public
+ * @since 1.1.0
  * @return void
  */
 function matty_theme_quickswitch_js () {

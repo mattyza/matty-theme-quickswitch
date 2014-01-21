@@ -4,7 +4,7 @@ Donate link: http://matty.co.za/
 Tags: themes, theme-development, development, theme switching, admin-bar, wordpress toolbar, theme search, utilities
 Requires at least: 3.2.1
 Tested up to: 3.3
-Stable tag: 1.2.1
+Stable tag: 1.2.2
 
 Quickly switch between themes via a menu in the WordPress Toolbar.
 
@@ -43,6 +43,10 @@ Currently, the WordPress Toolbar is required in order to use Matty Theme QuickSw
 
 == Changelog ==
 
+= 1.2.2 =
+* Make sure the full theme name is displayed in menu title when two themes share the same name (theme name and folder name).
+* Make the current active theme bold and a darker styling in the theme list.
+
 = 1.2.1 =
 * Adjust the position of the "reset" button when the search field has text (fixes overlapping reset button bug).
 * Make sure the search field focuses on hover of the menu.
@@ -61,6 +65,9 @@ Currently, the WordPress Toolbar is required in order to use Matty Theme QuickSw
 * First Release!
 
 == Upgrade Notice ==
+
+= 1.2.2 =
+Improved accuracy of theme name in the menu item, as well as bolded the current active theme in the theme list and made the styling of that text darker.
 
 = 1.2.0 =
 Fixed bug where some child themes didn't display due to an ID conflict. Adjust styling of the search field and split themes in the "Child Themes" and "Parent Themes" categories.
