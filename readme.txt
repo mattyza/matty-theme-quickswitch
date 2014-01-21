@@ -1,10 +1,10 @@
 === Plugin Name ===
 Contributors: mattyza
 Donate link: http://matty.co.za/
-Tags: themes, theme-development, development, theme switching, admin-bar
+Tags: themes, theme-development, development, theme switching, admin-bar, wordpress toolbar, theme search, utilities
 Requires at least: 3.2.1
 Tested up to: 3.3
-Stable tag: 1.1.0
+Stable tag: 1.2.0
 
 Quickly switch between themes via a menu in the WordPress Toolbar.
 
@@ -43,6 +43,11 @@ Currently, the WordPress Toolbar is required in order to use Matty Theme QuickSw
 
 == Changelog ==
 
+= 1.2.0 =
+* Adjusted styling of the search field and added magnifying glass icon.
+* Split themes into "Child Themes" and "Parent Themes" categories. Child themes are listed first, then parent themes.
+* Fix bug where not all child themes were displaying correctly in the list, due to an ID conflict.
+
 = 1.1.0 =
 * Added search form and search logic to the theme switcher menu on the WordPress toolbar.
 * Moved CSS to a separate file and added JavaScript file.
@@ -51,6 +56,9 @@ Currently, the WordPress Toolbar is required in order to use Matty Theme QuickSw
 * First Release!
 
 == Upgrade Notice ==
+
+= 1.2.0 =
+Fixed bug where some child themes didn't display due to an ID conflict. Adjust styling of the search field and split themes in the "Child Themes" and "Parent Themes" categories.
 
 = 1.1.0 =
 Added search functionality to the theme switcher menu.
