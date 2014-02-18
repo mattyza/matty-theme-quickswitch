@@ -10,15 +10,19 @@ Stable tag: 1.2.3
 License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 */
 
-if ( is_admin() ) {
+if ( ! function_exists( 'is_user_logged_in' ) ) {
+	require_once( ABSPATH . 'wp-includes/pluggable.php' );
+}
+
+if ( is_admin_bar_showing() ) {
 	add_action( 'admin_bar_menu', 'matty_theme_quickswitch_menu', 1 );
-	add_action( 'admin_print_styles', 'matty_theme_quickswitch_css', 10 );
-	add_action( 'admin_enqueue_scripts', 'matty_theme_quickswitch_js', 10 );
+	add_action( 'admin_enqueue_scripts', 'matty_theme_quickswitch_assets', 10 );
+	add_action( 'wp_enqueue_scripts', 'matty_theme_quickswitch_assets', 10 );
 }
 
 /**
  * Add the theme switcher menu to the WordPress Toolbar.
- * 
+ *
  * @access public
  * @since 1.0.0
  * @return void
@@ -27,7 +31,7 @@ function matty_theme_quickswitch_menu () {
 	global $wp_admin_bar, $current_user;
 
 	if ( ! current_user_can( 'switch_themes' ) ) { return; }
-	
+
 	$child_themes = array();
 	$parent_themes = array();
 
@@ -50,7 +54,7 @@ function matty_theme_quickswitch_menu () {
 	$count = 0;
 	$has_child_themes = false;
 	$end_child_themes = false;
-	
+
 	$menu_id = 'matty-theme-quickswitch';
 
 	foreach ( $themes as $k => $v ) {
@@ -87,8 +91,8 @@ function matty_theme_quickswitch_menu () {
 		}
 
 		$id = urlencode( str_replace( '/', '-', strtolower( $stylesheet ) ) );
-		$activate_link = wp_nonce_url( "themes.php?action=activate&amp;template=" . urlencode( $template ) . "&amp;stylesheet=" . urlencode( $stylesheet ), 'switch-theme_' . $stylesheet );
-	
+		$activate_link = wp_nonce_url( add_query_arg( array( 'action' => 'activate', 'template' => urlencode( $template ), 'stylesheet' => urlencode( $stylesheet ) ), admin_url( 'themes.php' ) ), 'switch-theme_' . $stylesheet );
+
 		if ( $has_child_themes == true && $end_child_themes == false && $template == $stylesheet ) {
 			$wp_admin_bar->add_menu( array( 'parent' => 'matty-theme-quickswitch', 'id' => 'heading-parent-themes', 'title' => __( 'Parent Themes', 'matty-theme-quickswitch' ), 'href' => '#' ) );
 
@@ -103,34 +107,18 @@ function matty_theme_quickswitch_menu () {
 } // End matty_theme_quickswitch_menu()
 
 /**
- * Load CSS for the plugin.
- * 
- * @access public
- * @since 1.0.0
- * @return void
- */
-function matty_theme_quickswitch_css () {
-	if ( ! current_user_can( 'switch_themes' ) ) { return; }
-
-	$plugin_url = trailingslashit( plugin_dir_url( __FILE__ ) );
-
-	wp_register_style( 'matty-theme-quickswitch', $plugin_url . 'assets/css/style.css', 'screen', '1.2.3' );
-	wp_enqueue_style( 'matty-theme-quickswitch' );
-} // End matty_theme_quickswitch_css()
-
-/**
- * Load JavaScript for the plugin.
- * 
+ * Load JavaScript and CSS for the plugin.
+ *
  * @access public
  * @since 1.1.0
  * @return void
  */
-function matty_theme_quickswitch_js () {
+function matty_theme_quickswitch_assets () {
 	if ( ! current_user_can( 'switch_themes' ) ) { return; }
 
-	$plugin_url = trailingslashit( plugin_dir_url( __FILE__ ) );
-
-	wp_register_script( 'matty-theme-quickswitch', $plugin_url . 'assets/js/functions.js', array( 'jquery' ), '1.2.3' );
+	wp_register_script( 'matty-theme-quickswitch', plugins_url( 'assets/js/functions.js', __FILE__ ), array( 'jquery' ), '1.2.3' );
 	wp_enqueue_script( 'matty-theme-quickswitch' );
-} // End matty_theme_quickswitch_js()
-?>
+
+	wp_register_style( 'matty-theme-quickswitch', plugins_url( 'assets/css/style.css', __FILE__ ), 'screen', '1.2.3' );
+	wp_enqueue_style( 'matty-theme-quickswitch' );
+} // End matty_theme_quickswitch_assets()
