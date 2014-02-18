@@ -91,7 +91,7 @@ function matty_theme_quickswitch_menu () {
 		}
 
 		$id = urlencode( str_replace( '/', '-', strtolower( $stylesheet ) ) );
-		$activate_link = wp_nonce_url( "themes.php?action=activate&amp;template=" . urlencode( $template ) . "&amp;stylesheet=" . urlencode( $stylesheet ), 'switch-theme_' . $stylesheet );
+		$activate_link = wp_nonce_url( add_query_arg( array( 'action' => 'activate', 'template' => urlencode( $template ), 'stylesheet' => urlencode( $stylesheet ) ), admin_url( 'themes.php' ) ), 'switch-theme_' . $stylesheet );
 
 		if ( $has_child_themes == true && $end_child_themes == false && $template == $stylesheet ) {
 			$wp_admin_bar->add_menu( array( 'parent' => 'matty-theme-quickswitch', 'id' => 'heading-parent-themes', 'title' => __( 'Parent Themes', 'matty-theme-quickswitch' ), 'href' => '#' ) );
