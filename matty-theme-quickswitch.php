@@ -1,14 +1,19 @@
 <?php
-/*
-Plugin Name: Matty Theme QuickSwitch
-Plugin URI: http://matty.co.za/
-Description: Adds a quick theme switcher to the WordPress Admin Bar, aimed at speeding up rapid theme switching during theme development and maintenance.
-Author: Matty
-Author URI: http://matty.co.za/
-Version: 1.2.3
-Stable tag: 1.2.3
-License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
-*/
+/**
+ * Plugin Name: Matty Theme QuickSwitch
+ * Plugin URI: http://matty.co.za/
+ * Description: Adds a quick theme switcher to the WordPress Admin Bar, aimed at speeding up rapid theme switching during theme development and maintenance.
+ * Author: Matty Cohen
+ * Author URI: http://matty.co.za/
+ * Version: 1.3.0
+ * Stable tag: 1.3.0
+ * License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * Requires at least: 3.9.1
+ * Tested up to: 3.9.1
+ *
+ * Text Domain: matty-theme-quickswitch
+ * Domain Path: /languages/
+ */
 
 if ( is_admin() ) {
 	add_action( 'admin_bar_menu', 'matty_theme_quickswitch_menu', 1 );
@@ -18,7 +23,7 @@ if ( is_admin() ) {
 
 /**
  * Add the theme switcher menu to the WordPress Toolbar.
- * 
+ *
  * @access public
  * @since 1.0.0
  * @return void
@@ -27,7 +32,7 @@ function matty_theme_quickswitch_menu () {
 	global $wp_admin_bar, $current_user;
 
 	if ( ! current_user_can( 'switch_themes' ) ) { return; }
-	
+
 	$child_themes = array();
 	$parent_themes = array();
 
@@ -50,7 +55,7 @@ function matty_theme_quickswitch_menu () {
 	$count = 0;
 	$has_child_themes = false;
 	$end_child_themes = false;
-	
+
 	$menu_id = 'matty-theme-quickswitch';
 
 	foreach ( $themes as $k => $v ) {
@@ -88,7 +93,7 @@ function matty_theme_quickswitch_menu () {
 
 		$id = urlencode( str_replace( '/', '-', strtolower( $stylesheet ) ) );
 		$activate_link = wp_nonce_url( "themes.php?action=activate&amp;template=" . urlencode( $template ) . "&amp;stylesheet=" . urlencode( $stylesheet ), 'switch-theme_' . $stylesheet );
-	
+
 		if ( $has_child_themes == true && $end_child_themes == false && $template == $stylesheet ) {
 			$wp_admin_bar->add_menu( array( 'parent' => 'matty-theme-quickswitch', 'id' => 'heading-parent-themes', 'title' => __( 'Parent Themes', 'matty-theme-quickswitch' ), 'href' => '#' ) );
 
@@ -96,15 +101,19 @@ function matty_theme_quickswitch_menu () {
 		}
 
 		$name = $v['Name'];
-		if ( $name == $menu_label ) { $name = '<strong>' . $name . '</strong>'; }
+		$class = '';
+		if ( $name == $menu_label ) {
+			$name = '<strong>' . $name . '</strong>';
+			$class = 'current';
+		}
 
-		$wp_admin_bar->add_menu( array( 'parent' => 'matty-theme-quickswitch', 'id' => 'theme-' . $id, 'title' => $name, 'href' => $activate_link ) );
+		$wp_admin_bar->add_menu( array( 'parent' => 'matty-theme-quickswitch', 'id' => 'theme-' . $id, 'meta' => array( 'class' => $class ), 'title' => $name, 'href' => $activate_link ) );
 	}
 } // End matty_theme_quickswitch_menu()
 
 /**
  * Load CSS for the plugin.
- * 
+ *
  * @access public
  * @since 1.0.0
  * @return void
@@ -114,13 +123,13 @@ function matty_theme_quickswitch_css () {
 
 	$plugin_url = trailingslashit( plugin_dir_url( __FILE__ ) );
 
-	wp_register_style( 'matty-theme-quickswitch', $plugin_url . 'assets/css/style.css', 'screen', '1.2.3' );
+	wp_register_style( 'matty-theme-quickswitch', $plugin_url . 'assets/css/style.css', 'screen', '1.3.0' );
 	wp_enqueue_style( 'matty-theme-quickswitch' );
 } // End matty_theme_quickswitch_css()
 
 /**
  * Load JavaScript for the plugin.
- * 
+ *
  * @access public
  * @since 1.1.0
  * @return void
@@ -130,7 +139,7 @@ function matty_theme_quickswitch_js () {
 
 	$plugin_url = trailingslashit( plugin_dir_url( __FILE__ ) );
 
-	wp_register_script( 'matty-theme-quickswitch', $plugin_url . 'assets/js/functions.js', array( 'jquery' ), '1.2.3' );
+	wp_register_script( 'matty-theme-quickswitch', $plugin_url . 'assets/js/functions.js', array( 'jquery' ), '1.3.0' );
 	wp_enqueue_script( 'matty-theme-quickswitch' );
 } // End matty_theme_quickswitch_js()
 ?>
