@@ -4,7 +4,7 @@ Donate link: http://matty.co.za/
 Tags: themes, theme-development, development, theme switching, admin-bar, wordpress toolbar, theme search, utilities
 Requires at least: 3.2.1
 Tested up to: 3.9.1
-Stable tag: 1.3.0
+Stable tag: 1.3.1
 
 Quickly switch between themes via a menu in the WordPress Toolbar.
 
@@ -43,6 +43,9 @@ Currently, the WordPress Toolbar is required in order to use Matty Theme QuickSw
 
 == Changelog ==
 
+= 1.3.1 =
+* Adds the ablitity to show the theme swithcer in the front end which redirects to the current page after activation.
+
 = 1.3.0 =
 * Adds a "current" CSS class to the current theme's list item.
 * Updates the styling to be WordPress 3.9.1 compatible.
@@ -73,6 +76,9 @@ Currently, the WordPress Toolbar is required in order to use Matty Theme QuickSw
 * First Release!
 
 == Upgrade Notice ==
+
+= 1.3.1 =
+* Adds the ablitity to show the theme swithcer in the front end which redirects to the current page after activation.
 
 = 1.3.0 =
 Adds a "current" CSS class to the current theme's list item and updates the styling to be WordPress 3.9.1 compatible.

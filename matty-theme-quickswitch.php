@@ -5,8 +5,8 @@
  * Description: Adds a quick theme switcher to the WordPress Admin Bar, aimed at speeding up rapid theme switching during theme development and maintenance.
  * Author: Matty Cohen
  * Author URI: http://matty.co.za/
- * Version: 1.3.0
- * Stable tag: 1.3.0
+ * Version: 1.3.1
+ * Stable tag: 1.3.1
  * License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * Requires at least: 3.9.1
  * Tested up to: 3.9.1
@@ -15,10 +15,19 @@
  * Domain Path: /languages/
  */
 
+// add menu bar hook
+add_action( 'admin_bar_menu', 'matty_theme_quickswitch_add_menu', 1 );
+
+// filter redirect request from front theme switch links
+add_filter('wp_redirect', 'matty_theme_quickswitch_redirect_to_frontend');
+
+// load scripts
 if ( is_admin() ) {
-	add_action( 'admin_bar_menu', 'matty_theme_quickswitch_menu', 1 );
 	add_action( 'admin_print_styles', 'matty_theme_quickswitch_css', 10 );
 	add_action( 'admin_enqueue_scripts', 'matty_theme_quickswitch_js', 10 );
+}else{
+	add_action( 'wp_enqueue_scripts', 'matty_theme_quickswitch_css', 10 );
+	add_action( 'wp_enqueue_scripts', 'matty_theme_quickswitch_js', 10 );
 }
 
 /**
@@ -28,8 +37,8 @@ if ( is_admin() ) {
  * @since 1.0.0
  * @return void
  */
-function matty_theme_quickswitch_menu () {
-	global $wp_admin_bar, $current_user;
+function matty_theme_quickswitch_add_menu() {
+	global $wp_admin_bar, $current_user, $wp;
 
 	if ( ! current_user_can( 'switch_themes' ) ) { return; }
 
@@ -79,6 +88,9 @@ function matty_theme_quickswitch_menu () {
 		$wp_admin_bar->add_menu( array( 'parent' => 'matty-theme-quickswitch', 'id' => 'heading-child-themes', 'title' => __( 'Child Themes', 'matty-theme-quickswitch' ), 'href' => '#' ) );
 	}
 
+	
+	$current_url = add_query_arg( $wp->query_string, '', home_url( $wp->request ) );
+	
 	// Theme List
 	foreach ( $themes as $k => $v ) {
 		$count++;
@@ -92,7 +104,12 @@ function matty_theme_quickswitch_menu () {
 		}
 
 		$id = urlencode( str_replace( '/', '-', strtolower( $stylesheet ) ) );
-		$activate_link = wp_nonce_url( "themes.php?action=activate&amp;template=" . urlencode( $template ) . "&amp;stylesheet=" . urlencode( $stylesheet ), 'switch-theme_' . $stylesheet );
+
+		if( is_admin() ){
+			$activate_link = wp_nonce_url( "themes.php?action=activate&amp;stylesheet=" . urlencode( $stylesheet ), 'switch-theme_' . $stylesheet );
+		}else{
+			$activate_link =  admin_url() . wp_nonce_url( "themes.php?action=activate&amp;redirect_url=". urlencode($current_url) ."&amp;stylesheet=" . urlencode( $stylesheet ), 'switch-theme_' . $stylesheet );
+		}
 
 		if ( $has_child_themes == true && $end_child_themes == false && $template == $stylesheet ) {
 			$wp_admin_bar->add_menu( array( 'parent' => 'matty-theme-quickswitch', 'id' => 'heading-parent-themes', 'title' => __( 'Parent Themes', 'matty-theme-quickswitch' ), 'href' => '#' ) );
@@ -142,4 +159,23 @@ function matty_theme_quickswitch_js () {
 	wp_register_script( 'matty-theme-quickswitch', $plugin_url . 'assets/js/functions.js', array( 'jquery' ), '1.3.0' );
 	wp_enqueue_script( 'matty-theme-quickswitch' );
 } // End matty_theme_quickswitch_js()
-?>
+
+
+/**
+ * Redirect front end theme switch requests
+ *
+ * @access public
+ * @since 1.3.1
+ * @return string $url
+ */
+function matty_theme_quickswitch_redirect_to_frontend ($redirect_url) {
+	
+	if( isset( $_REQUEST['action'] ) && 'activate' === $_REQUEST['action'] && isset( $_REQUEST['redirect_url'] )  ){
+		$url = urldecode( $_REQUEST['redirect_url'] );
+		return $url;
+	}else{
+		return $redirect_url;
+	}
+
+	
+} // End matty_theme_quickswitch_redirect_to_frontend()
